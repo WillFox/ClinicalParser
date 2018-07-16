@@ -210,7 +210,7 @@ multivariate_forest<-function(data,columns_to_test=c(),time="TIME",outcome="OUTC
     
   }
   rm(outcome)
-  if(length(columns_to_test)==0) columns_to_test<-colnames(data[,!(colnames(data)%in%c("TIME","OUTCOME",time,outcome))])
+  if(length(columns_to_test)==0) columns_to_test<-colnames(data[,!(colnames(data)%in%c("TIME","OUTCOME"))])
   #print(outcome)
   #print(nrow(data))
   #print(length(data$OUTCOME))

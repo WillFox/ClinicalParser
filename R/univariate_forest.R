@@ -186,7 +186,7 @@ cox_univariate_plotter<-function(cox_list,df=data,columns_to_test,title,verbose=
   return(df_summ)
 }
 
-univariate_forest<-function(data,columns_to_test,time="TIME",outcome="OUTCOME",title="Forest Plot for Hazard",verbose=T){
+univariate_forest<-function(data,columns_to_test,time="TIME",outcome="OUTCOME",title="Forest Plot for Hazard",verbose=TRUE){
   if(verbose) print("Generate coxph list started....")
   cox_list<-list()
   if(time!="TIME"){
@@ -199,7 +199,7 @@ univariate_forest<-function(data,columns_to_test,time="TIME",outcome="OUTCOME",t
     data[,outcome]<-NULL
     
   }
-  rm(outcome)
+  #rm(outcome)
   #print(outcome)
   #print(nrow(data))
   #print(length(data$OUTCOME))
@@ -208,6 +208,7 @@ univariate_forest<-function(data,columns_to_test,time="TIME",outcome="OUTCOME",t
   #print(table(data$OUTCOME,useNA = "a"))
   
   df<-data
+  if(verbose) print("Coxph list generating...")
   for(i in 1:length(columns_to_test)){
     cox_list[[i]]<-coxph(Surv(TIME,OUTCOME)~., data =df[,colnames(df)%in%
                                                           c(columns_to_test[i],
