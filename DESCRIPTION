@@ -7,3 +7,4 @@ Maintainer: William Fox <william.fox@ucsf.edu>
 Description: Clinical Parser was conceived by Rada Savic's group of Bioengineering at UCSF. Package provides methods of validating data sets, building forest plots, and generating demographics tables.
 Suggests: survival, survminer
 License: MIT
+RoxygenNote: 6.1.0

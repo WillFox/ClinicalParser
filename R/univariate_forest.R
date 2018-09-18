@@ -1,4 +1,18 @@
-#HIV_SEX_AGE_BMI_control
+
+#' Univariate Plotter for Cox Regression
+#'
+#' This function takes a list of coxph regressions completed in univariate. Takes both categorical and continuous coxph analysis
+#' @param cox_list a list of coxph regressions
+#' @param df the data that was utilized to build the coxph
+#' @param columns_to_test a vector of strings that match column names to include in output
+#' @param title the title shown at the top of the plot
+#' @param verbose the amount of status log output provided
+#' @keywords cox 
+#' @keywords regression
+#' @export
+#' @examples 
+#' cox_univariate_plotter()
+
 cox_univariate_plotter<-function(cox_list,df=data,columns_to_test,title,verbose=T){
   #Currently, must be of type list input
   if(!is.list(cox_list)) cox_list<-list(cox_list) else(cox_list<-cox_list)
@@ -185,6 +199,20 @@ cox_univariate_plotter<-function(cox_list,df=data,columns_to_test,title,verbose=
   print(surv_plot)
   return(df_summ)
 }
+
+#' Univariate Plotter for Cox Regression
+#'
+#' This function takes a data frame and iteratively performs univariate cox regression, prints a forrest plot, and returns a table that can use code from cox_univariate_plotter to customize the plot. 
+#' @param data A data frame that contains an outcome column, time column, and a column name within columns_to_test.
+#' @param columns_to_test The columns to test from the data
+#' @param time The continuous time to event column for the regression analysis. Default: "TIME"
+#' @param outcome The binary outcome column of the data. Default: "OUTCOME"
+#' @param title Title at top of plot. Default: "Forest Plot for Hazard"
+#' @param verbose the amount of status log output provided. Default: TRUE
+#' @keywords cox regression univariate
+#' @export
+#' @examples 
+#' univariate_forest()
 
 univariate_forest<-function(data,columns_to_test,time="TIME",outcome="OUTCOME",title="Forest Plot for Hazard",verbose=TRUE){
   if(verbose) print("Generate coxph list started....")

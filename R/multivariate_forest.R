@@ -1,3 +1,17 @@
+#' Univariate Plotter for Cox Regression
+#'
+#' This function takes a list of coxph regressions completed in univariate. Takes both categorical and continuous coxph analysis
+#' @param cox_list a list of coxph regressions
+#' @param df the data that was utilized to build the coxph
+#' @param columns_to_test a vector of strings that match column names to include in output
+#' @param title the title shown at the top of the plot
+#' @param verbose the amount of status log output provided
+#' @keywords cox 
+#' @keywords regression
+#' @export
+#' @examples 
+#' cox_univariate_plotter()
+
 cox_multivariate_plotter<-function(cox_data,df=data,columns_to_test,show_only,keep_insignificant,title,verbose=T){
   #Verify type coxph
   if(class(cox_data)!="coxph"){
@@ -194,7 +208,22 @@ cox_multivariate_plotter<-function(cox_data,df=data,columns_to_test,show_only,ke
   return(df_summ)
 }
 
-
+#' Multivariate Plotter for Cox Regression
+#'
+#' This function takes a data frame and performs Multivariate cox regression, prints a forrest plot, and returns a table that can use code from cox_univariate_plotter to customize the plot. 
+#' @param data A data frame that contains an outcome column, time column, and a column name within columns_to_test.
+#' @param columns_to_test The columns to test from the data, if NONE, all columns are included
+#' @param time The continuous time to event column for the regression analysis. Default: "TIME"
+#' @param outcome The binary outcome column of the data. Default: "OUTCOME"
+#' @param title Title at top of plot. Default: "Forest Plot for Hazard"
+#' @param keep_insignificant When FALSE, p value greater than 0.05 are not included in the output, but remain in calculation. With TRUE, all variables remain shown. Default: TRUE
+#' @param show_only A vector of the variables to show in output. If empty vector, all are shown. Default: c()
+#' @param verbose the amount of status log output provided. Default: TRUE
+#' @keywords cox regression multivariate
+#' @export
+#' @examples 
+#' multivariate_forest()
+ 
 multivariate_forest<-function(data,columns_to_test=c(),time="TIME",outcome="OUTCOME",title="Forest Plot for Hazard",
                                            keep_insignificant=TRUE,show_only=c(),verbose=T){
   if(verbose) print("Generate coxph list started....")
